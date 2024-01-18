@@ -13,7 +13,7 @@
 </head>
 <body class="body-bg">
 <div class="flex flex-col min-h-screen">
-    <nav class="bg-gradient-to-r from-blue-700 to-blue-900 py-3">
+    <nav class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-3 shadow-md">
         <div class="flex mx-auto px-4 md:px-6 lg:px-8" style="max-width: calc(100% - 50px);">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="/images/wamazon-charcoal.png" alt="Logo" class="h-10 flex items-center mr-5 transform hover:scale-110 transition duration-300">
@@ -22,7 +22,7 @@
             <div class="flex items-center flex-grow mx-5">
                 <form class="flex w-full">
                     <input type="search" class="px-2 py-1 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search">
-                    <button type="submit" class="bg-white text-black-500 px-3 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Search</button>
+                    <button type="submit" class="bg-white text-black px-3 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Search</button>
                 </form>
             </div>
 
@@ -54,7 +54,7 @@
 
 
     <!-- Sticky footer that stays at the bottom of the page no matter the size -->
-    <footer class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-6">
+    <footer class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-6 shadow-md">
         <div class="container mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div>
                 <h3 class="font-bold text-lg mb-3">Sell with Wamazon</h3>
