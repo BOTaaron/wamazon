@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    protected $fillable = ['sku', 'image', 'category', 'price'];
+
+    public function scopePaginate($query, $perPage)
+    {
+        return $query->paginate($perPage);
+    }
 }
