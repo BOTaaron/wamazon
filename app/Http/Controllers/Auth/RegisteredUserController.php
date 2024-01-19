@@ -42,6 +42,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Assign the default role to the new user
+        $defaultRole = Role::where('name', 'Customer')->first();
+        $user->role()->associate($defaultRole);
+        $user->save();
+
         event(new Registered($user));
 
         Auth::login($user);

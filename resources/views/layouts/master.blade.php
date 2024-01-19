@@ -11,6 +11,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/account-dropdown.js', 'resources/js/app.js'])
 </head>
+<!-- master webpage template. All future pages will follow this style with different content occurring within the body marked yield -->
 <body class="body-bg">
 <div class="flex flex-col min-h-screen">
     <nav class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-3 shadow-md">
@@ -26,16 +27,25 @@
                 </form>
             </div>
 
-            <div class="user-account-dropdown relative">
-                <!-- Trigger for dropdown -->
-                <div class="account-trigger text-white cursor-pointer py-2 px-4 hover:bg-blue-600 whitespace-nowrap">
-                    <span id="account-text">Sign In</span>
-                </div>
-                <!-- Dropdown content -->
-                <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign In</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Register</a>
-                </div>
+            <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
+            @auth
+                <!-- Display for logged-in users -->
+                    <span class="block px-4 py-2 text-sm text-gray-700">Hello, {{ Auth::user()->name }}</span>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">
+                        Sign Out
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                    </form>
+            @endauth
+
+            @guest
+                <!-- Display for guests -->
+                    <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign In</a>
+                    <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Register</a>
+                @endguest
             </div>
 
             <div class="flex items-center ml-auto">

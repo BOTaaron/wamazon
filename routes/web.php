@@ -28,4 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// protect specified routes so that only users with administrator role may access them
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+
+
+});
+
 require __DIR__.'/auth.php';
