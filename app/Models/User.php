@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+    public function isAdmin()
+    {
+        // Check if the user has the "administrator" role
+        return $this->role === 'administrator';
     }
 }
