@@ -27,30 +27,34 @@
                 </form>
             </div>
 
-            <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
-            @auth
-                <!-- Display for logged-in users -->
-                    <span class="block px-4 py-2 text-sm text-gray-700">Hello, {{ Auth::user()->name }}</span>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">
-                        Sign Out
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                        @csrf
-                    </form>
-            @endauth
 
-            @guest
-                <!-- Display for guests -->
-                    <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign In</a>
-                    <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Register</a>
-                @endguest
-            </div>
+
 
             <div class="flex items-center ml-auto">
-                <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Home</a>
-                <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Store</a>
+                <div class="account-dropdown-container relative">
+                    <!-- Trigger -->
+                    @guest
+                        <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white whitespace-nowrap">Sign In</a>
+                        <!-- Dropdown Menu for Guests -->
+                        <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
+                            <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign In</a>
+                            <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Register</a>
+                        </div>
+                    @else
+                        <span class="text-white px-5 py-2 rounded-md text-sm font-medium whitespace-nowrap">Hello, {{ Auth::user()->name }}</span>
+                        <!-- Dropdown Menu for Authenticated User -->
+                        <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign Out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
+                        </div>
+                    @endguest
+                </div>
+
+                <a href="/" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Home</a>
+                <a href="/store" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Store</a>
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Contact</a>
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">About</a>
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">News</a>
