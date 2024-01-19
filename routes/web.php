@@ -14,12 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// sets the home.blade.php file as the main page
 Route::get('/', function () {
     return view('home');
 });
-
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
