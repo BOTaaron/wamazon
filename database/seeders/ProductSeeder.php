@@ -10,6 +10,6 @@ class ProductSeeder extends Seeder
     public function run()
     {
         // Use the ProductFactory to create products
-        \App\Models\Product::factory(100)->create();
+        Product::factory(100)->create();
     }
 }

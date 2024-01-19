@@ -6,7 +6,8 @@
         @foreach($products as $product)
             <div class="border border-gray-300 rounded-lg shadow-md p-4">
                 <img src="{{ asset('/images/placeholder.png' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full">
-                <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
+                <h3 class="text-lg font-semibold truncate">{{ $product->name }}</h3>
+                <p class="text-gray-600">SKU: {{ $product->sku }}</p> <!-- Add SKU -->
                 <p class="text-gray-600">Price: ${{ $product->price }}</p>
                 <div class="mt-2">
                     @auth
@@ -18,5 +19,8 @@
                 <button class="bg-black text-white hover:bg-gray-800 px-4 py-2 mt-2 w-full">Add to Cart</button>
             </div>
         @endforeach
+        <div class="mt-4">
+            {{ $products->links() }}
+        </div>
     </div>
 @endsection

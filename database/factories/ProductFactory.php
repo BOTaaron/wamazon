@@ -14,6 +14,7 @@ class ProductFactory extends Factory
         $categories = ['Game', 'CD', 'Movie'];
         return [
             'sku' => $this->faker->unique()->randomNumber,
+            'name' => $this->faker->sentence,
             'image' => 'placeholder.jpg',
             'category' => $this->faker->randomElement($categories),
             'price' => $this->faker->randomFloat(2, 10, 100),
