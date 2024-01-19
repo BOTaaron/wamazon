@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
 Route::get('/store', function () {
     return view('store');
 });
@@ -29,12 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// protect specified routes so that only users with administrator role may access them
-Route::middleware(['auth', 'role:Administrator'])->group(function () {
-
-
 });
 
 require __DIR__.'/auth.php';
