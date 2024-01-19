@@ -22,6 +22,9 @@ Route::get('/', function () {
 Route::get('/store', function () {
     return view('store');
 });
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin', 'AdminController@index')->middleware('isAdmin');
+});
 
 Route::get('/store', [ProductsController::class, 'index'])->name('store.index');
 
