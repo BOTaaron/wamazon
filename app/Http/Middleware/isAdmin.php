@@ -9,7 +9,7 @@ class isAdmin
     public function handle($request, Closure $next)
     {
         // Check if the user is authenticated and has the "administrator" role
-        if (auth()->check() && auth()->user()->role === 'Administrator') {
+        if (auth()->check() && auth()->user()->role_id === '1') {
             return $next($request);
         }
 

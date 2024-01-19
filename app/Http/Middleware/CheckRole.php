@@ -10,7 +10,7 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, $role)
     {
-        if (auth()->check() && auth()->user()->role->name == $role) {
+        if (auth()->check() && auth()->user()->role_id === 1) {
             return $next($request);
         }
 
