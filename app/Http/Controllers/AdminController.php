@@ -31,7 +31,9 @@ class AdminController extends Controller
         $sku = $request->input('sku');
         $productToUpdate = Product::where('sku', $sku)->first();
 
-        return view('admin', compact('productToUpdate'));
+        $users = User::paginate(15);
+
+        return view('admin', compact('productToUpdate', 'users'));
     }
     public function updateProduct(Request $request, $id)
     {
