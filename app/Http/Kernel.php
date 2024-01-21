@@ -68,7 +68,6 @@ class Kernel extends HttpKernel
     // register middleware so laravel knows which class to use when calling role
     protected $routeMiddleware = [
         // ...
-        'role' => \App\Http\Middleware\CheckRole::class,
-        'isAdmin' => \App\Http\Middleware\isAdmin::class,
+
     ];
 }

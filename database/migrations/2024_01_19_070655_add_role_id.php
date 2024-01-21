@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
+    // adds the role_id to the users table for authentication purposes
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {

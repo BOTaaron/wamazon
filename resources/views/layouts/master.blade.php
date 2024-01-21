@@ -20,12 +20,16 @@
                 <img src="/images/wamazon-charcoal.png" alt="Logo" class="h-10 flex items-center mr-5 transform hover:scale-110 transition duration-300">
             </a>
             <!-- Search bar that takes up all available space between nav content using flex grow -->
-            <div class="flex items-center flex-grow mx-5">
-                <form class="flex w-full">
-                    <input type="search" class="px-2 py-1 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search">
-                    <button type="submit" class="bg-white text-black px-3 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Search</button>
-                </form>
-            </div>
+            <form class="flex w-full ml-4" action="{{ route('store.search') }}" method="GET">
+                <select name="category" class="px-2 py-1 border border-r-0 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-8 text-black">
+                    <option value="">All Categories</option>
+                    <option value="Game">Game</option>
+                    <option value="CD">CD</option>
+                    <option value="Movie">Movie</option>
+                </select>
+                <input type="search" name="query" class="px-2 py-1 w-full border focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black" placeholder="Search">
+                <button type="submit" class="bg-white text-black px-3 border border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Search</button>
+            </form>
 
 
 
@@ -35,7 +39,7 @@
                     <!-- Trigger -->
                     @guest
                         <a href="/dashboard" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white whitespace-nowrap">Sign In</a>
-                        <!-- Dropdown Menu for Guests -->
+                        <!-- Dropdown menu for guests when not logged in -->
                         <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
                             <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign In</a>
                             <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Register</a>
@@ -62,7 +66,8 @@
         </div>
     </nav>
 
-    <main class="flex-grow"></main>
+
+    <main class="flex-grow">
     @yield('content')
     </main>
 
@@ -106,7 +111,7 @@
             </div>
         </div>
     </footer>
-</div>
+
 
 </body>
 </html>
