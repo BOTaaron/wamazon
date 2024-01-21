@@ -46,7 +46,7 @@
                         </div>
                     @else
                         <a href="/dashboard" class="text-white px-5 py-2 rounded-md text-sm font-medium whitespace-nowrap">Hello, {{ Auth::user()->name }}</a>
-                        <!-- Dropdown Menu for Authenticated User -->
+                        <!-- Dropdown Menu for authenticated user -->
                         <div id="account-dropdown" class="dropdown-content absolute right-0 bg-white shadow-lg mt-1 hidden py-2 w-48">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500">Sign Out</a>
