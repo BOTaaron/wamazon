@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,11 @@ Route::get('/', function () {
 
 Route::get('/store', function () {
     return view('store');
+});
+
+//
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
 });
 
 Route::get('/store', [ProductsController::class, 'index'])->name('store.index');
