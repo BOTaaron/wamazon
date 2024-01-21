@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -11,7 +12,8 @@ class AdminController extends Controller
     {
         // Return the admin dashboard view
         $products = Product::all();
-        return view('admin', compact('products'));
+        $users = User::with('role')->paginate(15);
+        return view('admin', compact('products', 'users'));
     }
 
     public function searchProduct(Request $request)
@@ -109,5 +111,34 @@ class AdminController extends Controller
         $product->delete();
 
         return redirect()->back()->with('success', 'Product deleted successfully');
+    }
+    public function editUser($id)
+    {
+        $user = User::findOrFail($id);
+        // Return a view for editing the user
+        return view('editUser', compact('user'));
+    }
+    public function destroyUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully');
+    }
+    public function updateUser(Request $request, $id)
+    {
+        // method that updates a user in the database and then redirects to the admin panel
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'role_id' => 'required|integer|in:1,2,3',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = $request->role_id; //
+        $user->save();
+
+        return redirect()->route('admin.index')->with('success', 'User updated successfully');
     }
 }

@@ -87,6 +87,42 @@
 
 
         <!-- User Modification Section -->
+            <div class="bg-gray-400 p-4 rounded-lg mt-4">
+                <div class="bg-gray-800 p-4 rounded-lg mt-8">
+                    <h1 class="text-white">User Management</h1>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                        <tr>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Role</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td class="py-3 px-4">{{ $user->name }}</td>
+                                <td class="py-3 px-4">{{ $user->email }}</td>
+                                <td class="py-3 px-4">{{ $user->role->name }}</td>
+                                <td class="py-3 px-4">
+                                    <!-- Edit user button -->
+                                    <a href="{{ route('admin.editUser', $user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                                    <!-- Delete user button -->
+                                    <form action="{{ route('admin.destroyUser', $user->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <!-- Pagination Links -->
+                    {{ $users->links() }}
+                </div>
+            </div>
 
          </div>
      </div>
