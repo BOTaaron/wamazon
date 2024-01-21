@@ -58,8 +58,8 @@ class AdminController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-            $product->image = $imagePath;
+            $imagePath = $request->file('image')->store('images', 'public');
+            $product->image = basename($imagePath);
         }
 
         $product->save();
@@ -69,9 +69,25 @@ class AdminController extends Controller
 
     public function storeProduct(Request $request)
     {
-        // method for creating a new product in admin panel
-        $data = $request->all(); // Add validation as needed
-        $data['image'] = $request->hasFile('image') ? $request->file('image')->store('products') : 'placeholder.png';
+        // all fields required except for image, which will use a placeholder if not uploaded
+        $request->validate([
+            'sku' => 'required|unique:products,sku',
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'category' => 'required|in:Game,CD,Movie',
+            'image' => 'nullable|image',
+        ]);
+
+        $data = $request->only(['sku', 'name', 'price', 'category']);
+
+        // Handle image upload
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $data['image'] = basename($imagePath);
+        } else {
+            // Set default image if no image is uploaded
+            $data['image'] = 'placeholder.jpg'; // Replace 'default.jpg' with your default image's filename
+        }
 
         Product::create($data);
 
