@@ -4,6 +4,7 @@
         <h1>Admin Dashboard</h1>
 
         <!-- Product Modification Section -->
+        @can('modify-products')
         <div class="bg-gray-800 p-4 rounded-lg"> <!-- Dark container -->
             <div class="bg-gray-400 p-4 rounded-lg"> <!-- Create Product -->
                 <div class="create-product-section">
@@ -84,9 +85,11 @@
                     @endif
                 </div>
             </div>
+        @endcan
 
 
         <!-- User Modification Section -->
+            @can('modify-users')
             <div class="bg-gray-400 p-4 rounded-lg mt-4">
                 <div class="bg-gray-800 p-4 rounded-lg mt-8">
                     <h1 class="text-white">User Management</h1>
@@ -123,6 +126,7 @@
                     {{ $users->links() }}
                 </div>
             </div>
+                @endcan
 
          </div>
      </div>

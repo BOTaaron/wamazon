@@ -10,8 +10,8 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated and has the role_id of 1 (Administrator)
-        if (Auth::check() && Auth::user()->role_id == 1) {
+        // Check if the user is authenticated and has the role_id of 1 (Administrator) or 2 (Seller)
+        if (Auth::check() && Auth::user()->role_id == 1 || auth()->user()->role_id == 2) {
             return $next($request);
         }
 
