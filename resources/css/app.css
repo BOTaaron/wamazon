@@ -5,3 +5,11 @@
 .account-dropdown-container:hover .dropdown-content {
     display: block;
 }
+.body-bg {
+    background-image: url('/../public/images/noise-bg.png');
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+

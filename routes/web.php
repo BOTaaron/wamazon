@@ -24,9 +24,21 @@ Route::get('/store', function () {
     return view('store');
 });
 
-//
+// middleware to authenticate user as Administrator before accessing /admin page
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
+    // admin route for searching a product
+    Route::get('/admin/search-product', [AdminController::class, 'searchProduct'])->name('admin.searchProduct');
+    // admin route for creating a new product
+    Route::post('/admin/store-product', [AdminController::class, 'storeProduct'])->name('admin.storeProduct');
+    // admin route to display the searched product for deletion
+    Route::get('/admin/search-product-to-delete', [AdminController::class, 'searchProductToDelete'])->name('admin.searchProductToDelete');
+    // admin route for deleting a product from database
+    Route::delete('/admin/destroy-product/{id}', [AdminController::class, 'destroyProduct'])->name('admin.destroyProduct');
+    // admin route to search a product to update
+    Route::get('/admin/search-product-to-update', [AdminController::class, 'searchProductToUpdate'])->name('admin.searchProductToUpdate');
+    // admin route for updating a product
+    Route::put('/admin/update-product/{id}', [AdminController::class, 'updateProduct'])->name('admin.updateProduct');
 });
 
 Route::get('/store', [ProductsController::class, 'index'])->name('store.index');

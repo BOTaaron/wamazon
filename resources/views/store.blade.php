@@ -4,7 +4,7 @@
 @section('content')
     <div class="grid grid-cols-5 gap-4 max-w-screen-xl mx-auto">
         @foreach($products as $product)
-            <div class="border border-gray-300 rounded-lg shadow-md p-4">
+            <div class="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
                 <img src="{{ asset('/images/placeholder.png' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full">
                 <h3 class="text-lg font-semibold truncate">{{ $product->name }}</h3>
                 <p class="text-gray-600">SKU: {{ $product->sku }}</p> <!-- Add SKU -->
