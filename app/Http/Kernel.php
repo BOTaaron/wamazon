@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
     // register middleware so laravel knows which class to use when calling role
     protected $routeMiddleware = [
         // ...
-
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }
