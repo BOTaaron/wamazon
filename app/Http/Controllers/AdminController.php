@@ -8,11 +8,26 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Return the admin dashboard view
         $products = Product::all();
-        $users = User::with('role')->paginate(15);
+
+        // Sorting logic for users
+        $sort = $request->input('sort', 'name'); // Default sort column
+        $direction = $request->input('direction', 'asc'); // Default sort direction
+
+        // Adjust the user query based on the sort column and direction
+        if ($sort === 'role') {
+            // If sorting by role, use a join with the roles table
+            $users = User::join('roles', 'users.role_id', '=', 'roles.id')
+                ->orderBy('roles.name', $direction)
+                ->select('users.*')
+                ->paginate(15);
+        } else {
+            // For other columns, sort directly
+            $users = User::with('role')->orderBy($sort, $direction)->paginate(15);
+        }
+
         return view('admin', compact('products', 'users'));
     }
 

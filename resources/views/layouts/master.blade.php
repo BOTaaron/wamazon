@@ -62,9 +62,50 @@
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">Contact</a>
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">About</a>
                 <a href="#" class="text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 hover:border hover:border-white">News</a>
+
+
+
             </div>
+            <!-- dropdown menu for shopping cart -->
+            <div class="relative mr-4 group">
+                <a href="#" class="text-white  rounded-md text-sm font-medium ">
+                    <img src="/images/shopping-cart.png" alt="Cart" class="w-6 h-6 md:w-8 md:h-8 object-contain hover:bg-blue-800">
+                </a>
+                <div class="dropdown-content absolute hidden group-hover:block right-0 mt-2 bg-white shadow-lg p-4 rounded text-black">
+                    @if(session('cart'))
+                        <ul>
+                            @foreach(session('cart') as $id => $details)
+                                <li>
+                                    {{ Str::limit($details['name'], 10) }} - ${{ number_format($details['price'], 2) }}
+                                    <form action="{{ route('cart.update', $id) }}" method="POST">
+                                        @csrf
+                                        @method('patch')
+                                        <input type="number" name="quantity" value="{{ $details['quantity'] }}" min="1">
+                                        <button type="submit">Update</button>
+                                    </form>
+                                    <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit">Remove</button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <div class="text-right font-bold">
+                            Total: ${{ number_format(array_sum(array_map(function($item) { return $item['price'] * $item['quantity']; }, session('cart'))), 2) }}
+                        </div>
+                        <button class="bg-blue-500 text-white px-4 py-2 mt-4 w-full">Checkout</button>
+                    @else
+                        <div>Your cart is empty</div>
+                    @endif
+                </div>
+
+            </div>
+
+
         </div>
     </nav>
+
 
 
     <main class="flex-grow">
@@ -112,6 +153,6 @@
         </div>
     </footer>
 
-
+</div>
 </body>
 </html>

@@ -11,7 +11,10 @@
                 <p class="text-gray-600">Price: ${{ $product->price }}</p>
                 <div class="mt-2">
                 </div>
-                <button class="bg-black text-white hover:bg-gray-800 px-4 py-2 mt-2 w-full">Add to Cart</button>
+                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-black text-white hover:bg-gray-800 px-4 py-2 mt-2 w-full">Add to Cart</button>
+                </form>
             </div>
         @endforeach
         <div class="mt-4">
